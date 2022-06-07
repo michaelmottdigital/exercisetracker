@@ -31,6 +31,11 @@ app.get('/api/users/:_id/logs', (req, res) => {
     return item._id === req.params._id
   })
 
+  delete activity._id
+
+  activity.forEach((item, index) => {
+    item = delete item._id
+  })
 
   result = {
     _id: user._id,
