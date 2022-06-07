@@ -61,9 +61,9 @@ app.post('/api/users/:_id/exercises', (req, res) => {
 
   logs.push({ description: req.body.description, duration: req.body.duration, date: date  })
 
-  user.log = logs 
+  //user.log = logs 
 
-  user.count = logs.length
+  //user.count = logs.length
 
   //console.log('*** logs: ', user.log)
 
