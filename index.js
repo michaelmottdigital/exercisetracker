@@ -58,7 +58,7 @@ app.post('/api/users/:_id/exercises', (req, res) => {
   console.log('*** date', date)
 
   user.description =  req.body.description
-  user.duration = req.body.duration
+  user.duration = Number(req.body.duration)
   user.date = date
 
 
