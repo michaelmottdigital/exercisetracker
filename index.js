@@ -48,11 +48,14 @@ app.post('/api/users/:_id/exercises', (req, res) => {
 
   var date = req.body.date
   if (date == '') {
-    date = new Date().toDateString
+    date = new Date().toDateString()
   } else {
-    date = new Date(date).toDateString
+    date = new Date(date).toDateString()
 
   }
+
+
+  console.log('*** date', date)
 
   user.description =  req.body.description
   user.duration = req.body.duration
