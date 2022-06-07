@@ -36,7 +36,7 @@ app.get('/api/users/:_id/logs', (req, res) => {
     _id: user._id,
     username: users.username,
     count: activity.length,
-    logs: activity
+    log: activity
 
   }
 
