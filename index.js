@@ -8,6 +8,7 @@ const shortid = require('shortid')
 require('dotenv').config()
 
 var users = []
+var logs = []
 
 app.use(cors())
 app.use(express.static('public'))
@@ -20,11 +21,27 @@ app.get('/', (req, res) => {
 
 app.get('/api/users/:_id/logs', (req, res) => {
     
+  //console.log(req.params._id)
+  console.log('*** logs', logs)
+  activity = logs.filter((item, index) => {
+    return item._id === req.params._id
+  })
+
   user = users.find((item, index) => {
     return item._id === req.params._id
   })
 
-  res.json(user)
+
+  result = {
+    _id: user._id,
+    username: users.username,
+    count: activity.length,
+    logs: activity
+
+  }
+
+  //console.log('*** activity', activity)
+  res.json(result)
 
 })
 
@@ -38,13 +55,6 @@ app.post('/api/users/:_id/exercises', (req, res) => {
   })
 
 
-  // get list of log entries
-  var logs
-  if (user.log) {
-    logs = user.log
-  } else {
-    logs = []
-  }
 
   var date = req.body.date
   if (date == '') {
@@ -55,23 +65,14 @@ app.post('/api/users/:_id/exercises', (req, res) => {
   }
 
 
-  console.log('*** date', date)
+  //console.log('*** date', date)
 
   user.description =  req.body.description
   user.duration = Number(req.body.duration)
   user.date = date
 
 
-  logs.push({ description: req.body.description, duration: req.body.duration, date: date  })
-
-  //user.log = logs 
-
-  //user.count = logs.length
-
-  //console.log('*** logs: ', user.log)
-
-  
-
+  logs.push({ _id: req.params._id ,description: req.body.description, duration: Number(req.body.duration), date: date  })
 
   res.json(user)
 
