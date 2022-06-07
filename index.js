@@ -54,6 +54,11 @@ app.post('/api/users/:_id/exercises', (req, res) => {
 
   }
 
+  user.description =  req.body.description
+  user.duration = req.body.duration
+  user.date = date
+  
+
   logs.push({ description: req.body.description, duration: req.body.duration, date: date  })
 
   user.log = logs 
